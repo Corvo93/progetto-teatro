@@ -1,0 +1,23 @@
+<h1>Progetto Prenotazione Teatro - Esame Sviluppo dei servizi web</h1>
+
+<!-- L'elemento app-newteatro è un componente che viene visualizzato solo quando lo stato è 0. Questo componente ha un form per impostare le dimensioni del teatro e la disposizione dei posti. -->
+
+<div *ngIf = "stato == 0" style = "margin-bottom: 15px;">
+  <b>ACCESSO</b>
+  <h3>Per eseguire l'accesso al teatro, inserisci la chiave e premi conferma</h3>
+  <input type = "text" placeholder = "Chiave teatro" #key />
+  <button (click) = "accesso(key.value); key.value = ''">Conferma</button>
+  <app-newteatro
+    [stato] = "stato"
+    (stato_uscita) = "aggiorna_valore($event)"
+    (key_uscita) = "aggiorna_valore($event)"
+  ></app-newteatro>
+</div>
+
+<!-- L'elemento app-nominativo è un componente che viene visualizzato solo quando lo stato è 1. Questo componente ha un form per inserire il nominativo dell'utente. -->
+
+<app-nominativo *ngIf = "stato == 1" [key] = "key"></app-nominativo>
+
+<!-- Mostra eventuali avvisi o messaggi di errore relativi all'accesso al teatro -->
+
+<div>{{ avviso }}</div>

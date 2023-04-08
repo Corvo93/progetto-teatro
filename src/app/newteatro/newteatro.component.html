@@ -1,0 +1,28 @@
+<div>
+  <h3>Vuoi creare un teatro nuovo? Scegli le misure qua sotto</h3>
+  <p>
+    Le misure minime consentite sono
+    <strong>2 file di 2 posti ciascuno</strong> e le misure massime sono
+    <strong>4 file di 10 posti ciascuno</strong>.
+  </p>
+  <div *ngFor="let zona of conf; index as i">
+    {{ zona }}:
+    <select style="margin-left: 10px;" (change)="valore_selezionato($event, i)">
+      <option disabled selected></option>
+      <option *ngFor="let numero of i % 2 == 0 ? file : posti" [value]="numero">
+        {{ numero }}
+      </option>
+    </select>
+  </div>
+  <div *ngIf="teatro_config.length == 4">
+    <p>
+      Vuoi fare un teatro di: <br />
+      Platea : <strong>{{ teatro_config[0] }}</strong> x
+      <strong>{{ teatro_config[1] }}</strong> (file x posti)
+      <br />
+      Palco : <strong>{{ teatro_config[2] }}</strong> x
+      <strong>{{ teatro_config[3] }}</strong> (file x posti)
+    </p>
+    <button (click)="nuovo_teatro()">Vuoi confermare?</button>
+  </div>
+</div>
